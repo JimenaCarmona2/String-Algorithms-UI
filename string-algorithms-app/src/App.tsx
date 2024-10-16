@@ -5,6 +5,7 @@ import './index.css'
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack'
 import ActionButton from './components/ActionButton';
+import TextField from '@mui/material/TextField';
 
 function App() {
   // contenido de los dos archivos de texto
@@ -39,6 +40,14 @@ function App() {
           <ActionButton algorithmText='Similitud' onClick={ () => console.log('1')}></ActionButton>
           <ActionButton algorithmText='Palíndromo' onClick={ () => console.log('1')}></ActionButton>
         </Stack>
+
+        <h3>Autocompletar</h3>
+        <Card sx={{margin: '16px'}}>
+          <div className='column'>
+            <TextField id="outlined-basic" label="Escribe una palabra" variant="outlined" />
+
+          </div>
+        </Card>
 
     </div>
   )
