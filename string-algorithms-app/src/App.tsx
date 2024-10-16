@@ -5,6 +5,7 @@ import './index.css'
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack'
 import ActionButton from './components/ActionButton';
+import Manacher from './algorithms/Manacher'
 
 function App() {
   // contenido de los dos archivos de texto
@@ -36,7 +37,7 @@ function App() {
         </div>
 
         <Stack  direction='row' sx = {{margin: '16px'}}>
-          <ActionButton algorithmText='Similitud' onClick={ () => console.log('1')}></ActionButton>
+          <ActionButton algorithmText='Similitud' onClick={() => console.log(Manacher('casssa'))}></ActionButton>
           <ActionButton algorithmText='Palíndromo' onClick={ () => console.log('1')}></ActionButton>
         </Stack>
 
