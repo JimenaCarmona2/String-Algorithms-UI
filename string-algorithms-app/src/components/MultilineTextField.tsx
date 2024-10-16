@@ -1,8 +1,6 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 
-// Componente original: https://mui.com/material-ui/react-text-field/#system-MultilineTextFields.tsx
 interface MultilineTextFieldProps {
   label: string;
   text: string;
@@ -12,25 +10,36 @@ export default function MultilineTextField({ label, text }: MultilineTextFieldPr
   return (
     <Box
       component='form'
-      sx={{ '& .MuiTextField-root': { m: 1, width: '50ch' }, 'color': 'black'}}
-      noValidate
-      autoComplete='off'
-    >
-      <div>
-        <TextField
-          id='filled-multiline-static'
-          label= {label}
-          multiline
-          rows={10}
-          value={text ? text : 'Esperando archivo...'}
-          variant='filled'
-          slotProps={{
-            input: {
-              readOnly: true
-            },
-          }}
-        />
-      </div>
+      sx={{ 
+        '& .MuiTextField-root': { width: '50ch' }, 
+        color: 'black', 
+        padding: 0 
+      }}
+      noValidate>
+      <Box  
+        sx={{
+          width: 400,
+          height: 300,
+          overflowY: 'auto',
+          padding: 2,
+          backgroundColor: '#f5f5f5',
+          borderRadius: 2,
+          boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.1)',
+        }}>
+
+        <Typography 
+          variant="subtitle2" 
+          color="textSecondary" 
+          gutterBottom
+          sx={{ fontSize: 12 }}
+        >
+          {label}
+        </Typography>
+        
+        <Typography>
+          {text}
+        </Typography>
+        </Box>
     </Box>
   );
 }

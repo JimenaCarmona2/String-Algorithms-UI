@@ -2,11 +2,11 @@ import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
-interface BasicButtonProps {
+interface FileUploadButtonProps {
   setFileContent: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function BasicButton({setFileContent} : BasicButtonProps) {
+export default function FileUploadButton({setFileContent} : FileUploadButtonProps) {
 
   // función para tomar el archivo .txt y actualizar el estado con el setFileContent de las props de este componente
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,11 +24,11 @@ export default function BasicButton({setFileContent} : BasicButtonProps) {
   };
 
   return (
-    <Stack spacing={2} direction='row'>
+    <Stack spacing={2} direction='row' sx = {{margin: '16px'}}>
       <Button
         variant='contained'
         component='label'
-        sx={{ backgroundColor: '#98BF64' }}
+        style={{textTransform: 'none', width: '130px'}}
       >
         Subir Archivo
         <input
