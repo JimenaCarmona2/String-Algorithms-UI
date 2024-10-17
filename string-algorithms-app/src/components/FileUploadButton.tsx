@@ -4,9 +4,10 @@ import Button from '@mui/material/Button';
 
 interface FileUploadButtonProps {
   setFileContent: React.Dispatch<React.SetStateAction<string>>;
+  setTextContent: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function FileUploadButton({setFileContent} : FileUploadButtonProps) {
+export default function FileUploadButton({setFileContent, setTextContent} : FileUploadButtonProps) {
 
   // función para tomar el archivo .txt y actualizar el estado con el setFileContent de las props de este componente
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,6 +17,7 @@ export default function FileUploadButton({setFileContent} : FileUploadButtonProp
       reader.onload = (e: ProgressEvent<FileReader>) => {
         const content = e.target?.result as string;
         setFileContent(content);
+        setTextContent(content);
       };
       reader.readAsText(file);
     } else {

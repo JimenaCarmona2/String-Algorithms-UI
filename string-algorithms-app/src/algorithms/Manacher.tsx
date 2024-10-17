@@ -1,3 +1,5 @@
+import Z from './Z'
+
 function computeManacherString(T: string) {
     let manacherString = '';
 
@@ -11,7 +13,7 @@ function computeManacherString(T: string) {
 }
 
 // regresa un string del palíndromo más largo en una cadena
-export default function longestPalindromicSubstring(T: string) {
+function longestPalindromicSubstring(T: string) {
     let manacherString = computeManacherString(T);
 
     let P = Array(manacherString.length).fill(0);
@@ -44,4 +46,35 @@ export default function longestPalindromicSubstring(T: string) {
     let palindrome = T.substring(start, start + maxSize);
 
     return palindrome
+}
+
+// regresa un html con etiquetas de <mark> que enciearran a los palíndromos más largos
+export default function highlightedPalindromeHTML(T: string) {
+
+    let palindrome = longestPalindromicSubstring(T);
+    let indexes = Z(T, palindrome);
+    let stringSize = palindrome.length;
+
+    let html = '';
+
+    let i = 0;
+
+    while (i < T.length) {
+        if (indexes.includes(i)) {
+            html = html + '<mark>';
+
+            for (let j = 0; j < stringSize && (i + j) < T.length; j++) {
+                html = html + T[i + j];
+            }
+
+            html = html + '</mark>'
+            i = i + stringSize;
+        }
+        else {
+            html = html + T[i];
+            i++;
+        }
+    }
+
+    return html;
 }

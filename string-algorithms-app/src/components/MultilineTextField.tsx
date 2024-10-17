@@ -36,9 +36,9 @@ export default function MultilineTextField({ label, text }: MultilineTextFieldPr
           {label}
         </Typography>
         
-        <Typography>
-          {text}
-        </Typography>
+        <div
+          dangerouslySetInnerHTML={{ __html: text }}
+        />
         </Box>
     </Box>
   );
