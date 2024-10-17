@@ -20,7 +20,7 @@ function App() {
 
   return (
     <div className='column'>
-        <h1>String Algorithms UI</h1>
+        <h1>String Algorithms</h1>
         
         <div className='row'>
           <Card sx={{margin: '16px'}}>
