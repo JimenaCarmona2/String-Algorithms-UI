@@ -6,6 +6,7 @@ import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack'
 import ActionButton from './components/ActionButton';
 import highlightedPalindromeHTML from './algorithms/Manacher';
+import highlightedLCSHTML from './algorithms/LCS';
 
 function App() {
   // contenido de los dos archivos de texto
@@ -38,11 +39,9 @@ function App() {
         </div>
 
         <Stack  direction='row' sx = {{margin: '16px'}}>
-          <ActionButton algorithmText='Similitud' onClick={() => console.log('asd')}></ActionButton>
-          <ActionButton algorithmText='Palíndromo' onClick={() => setText1Content(highlightedPalindromeHTML(fileContent1))}></ActionButton>
+          <ActionButton algorithmText='Similitud' onClick={() => highlightedLCSHTML(fileContent1, fileContent2, setText1Content, setText2Content)}></ActionButton>
+          <ActionButton algorithmText='Palíndromo' onClick={() => highlightedPalindromeHTML(fileContent1, setText1Content, fileContent2, setText2Content)}></ActionButton>
         </Stack>
-
-
       
     </div>
   )

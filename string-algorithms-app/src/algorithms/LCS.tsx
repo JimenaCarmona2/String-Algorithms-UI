@@ -27,21 +27,20 @@ function LCS(T1: string, T2: string) {
         }
     }
     
-    let startIndex1 = finalIndexT1 - stringLength;
-    let startIndex2 = finalIndexT2 - stringLength;
+    let startIndex1 = finalIndexT1 - stringLength + 1; 
+    let startIndex2 = finalIndexT2 - stringLength + 1;
 
     return { stringLength, startIndex1, startIndex2 };
 }
 
 // regresa un html con etiquetas de <mark> que enciearran a los palíndromos más largos
-export default function highlightedPalindromeHTML(T1: string, T2: string) {
+export default function highlightedLCSHTML(T1: string, T2: string, setText1Content: React.Dispatch<React.SetStateAction<string>>, setText2Content: React.Dispatch<React.SetStateAction<string>>) {
 
     let LCSResult = LCS(T1, T2);
 
     let stringLength = LCSResult.stringLength;
     let startIndex1 = LCSResult.startIndex1;
     let startIndex2 = LCSResult.startIndex2;
-
 
     // construir HTML del texto 1
     let htmlText1 = '';
@@ -65,7 +64,6 @@ export default function highlightedPalindromeHTML(T1: string, T2: string) {
         }
     }
 
-
     // construir HTML del texto 2
     let htmlText2 = '';
 
@@ -88,5 +86,6 @@ export default function highlightedPalindromeHTML(T1: string, T2: string) {
         }
     }
 
-    return { htmlText1, htmlText2 };
+    setText1Content(htmlText1);
+    setText2Content(htmlText2);
 }
