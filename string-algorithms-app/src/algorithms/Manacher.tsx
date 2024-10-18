@@ -49,7 +49,7 @@ function longestPalindromicSubstring(T: string) {
 }
 
 // regresa un html con etiquetas de <mark> que enciearran a los palíndromos más largos
-export default function highlightedPalindromeHTML(T: string) {
+export default function highlightedPalindromeHTML(T: string, setText1Content: React.Dispatch<React.SetStateAction<string>>, fileContent2: string, setText2Content: React.Dispatch<React.SetStateAction<string>>) {
 
     let palindrome = longestPalindromicSubstring(T);
     let indexes = Z(T, palindrome);
@@ -61,7 +61,7 @@ export default function highlightedPalindromeHTML(T: string) {
 
     while (i < T.length) {
         if (indexes.includes(i)) {
-            html = html + '<mark>';
+            html = html + '<mark style="background-color: lightgreen;">';
 
             for (let j = 0; j < stringSize && (i + j) < T.length; j++) {
                 html = html + T[i + j];
@@ -76,5 +76,9 @@ export default function highlightedPalindromeHTML(T: string) {
         }
     }
 
-    return html;
+    // el texto subrayado del palíndromo se asigna a text1
+    setText1Content(html);
+
+    // el texto 2 se resetea al texto original para evitar confusiones
+    setText2Content(fileContent2);
 }
