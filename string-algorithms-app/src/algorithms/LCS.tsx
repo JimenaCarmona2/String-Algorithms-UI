@@ -49,7 +49,7 @@ export default function highlightedLCSHTML(T1: string, T2: string, setText1Conte
 
     while (i < T1.length) {
         if (i === startIndex1) {
-            htmlText1 = htmlText1 + '<mark>';
+            htmlText1 = htmlText1 + '<mark style="background-color: lightblue;">';
 
             for (let j = 0; j < stringLength && (i + j) < T1.length; j++) {
                 htmlText1 = htmlText1 + T1[i + j];
@@ -71,7 +71,7 @@ export default function highlightedLCSHTML(T1: string, T2: string, setText1Conte
 
     while (i < T2.length) {
         if (i === startIndex2) {
-            htmlText2 = htmlText2 + '<mark>';
+            htmlText2 = htmlText2 + '<mark style="background-color: lightblue;">';
 
             for (let j = 0; j < stringLength && (i + j) < T2.length; j++) {
                 htmlText2 = htmlText2 + T2[i + j];

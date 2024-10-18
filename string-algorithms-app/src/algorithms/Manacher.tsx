@@ -61,7 +61,7 @@ export default function highlightedPalindromeHTML(T: string, setText1Content: Re
 
     while (i < T.length) {
         if (indexes.includes(i)) {
-            html = html + '<mark>';
+            html = html + '<mark style="background-color: lightgreen;">';
 
             for (let j = 0; j < stringSize && (i + j) < T.length; j++) {
                 html = html + T[i + j];
