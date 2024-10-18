@@ -38,8 +38,7 @@ export class TrieTree {
 
     /* Input: string 
     Output: par del último nodo en el árbol que coincide con el prefijo del input
-    y el tamaño del último nodo hasta el primero.
-    */
+    y el tamaño del último nodo hasta el primero. */
     private findNode(str: string): [TrieNode, number] {
         if (str.length == 0) { // Si no hay string
             return [this.root, 0]; // Vacío
@@ -58,9 +57,33 @@ export class TrieTree {
         return [node, depth]
     }
 
-    // visit es una función callback que recibe un string (str) y no regresa nada (void)
-    private transverse(node: TrieNode, prefix: string, visit: (str: string) => void): void {
+    /* Recursive depth-first 
+    visit es una función callback que recibe un string (str) y no regresa nada (void) 
+    Input: nodo a comenzar, prefijo a seguir como camino y la función de visita*/
+    private traverse(node: TrieNode, prefix: string, visit: (str: string) => void): void {
+        if (node.isEnding()) {
+            visit(prefix);
+        }
 
+        for (const char of node.children.keys()) {
+            const next_node = node.getChild(char);
+            this.traverse(next_node, prefix + char, visit);
+        }
+    }
+
+    // Output: lista de strings que coinciden con el prefijo de input
+    complete(prefix: string): string[] {
+        const completions: string[] = [];
+        const [node, depth] = this.findNode(prefix);
+        
+        if (depth === 0) {
+            // Si no se encuentra el nodo
+            return completions // Se regresa la lista vacía
+        }
+
+        // Si se encuentra el nodo, se trasversa
+        this.traverse(node, prefix, completions.push.bind(completions));
+        return completions;
     }
 
 }
