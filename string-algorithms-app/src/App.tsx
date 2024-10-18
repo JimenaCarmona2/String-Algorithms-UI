@@ -5,6 +5,7 @@ import './index.css'
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack'
 import ActionButton from './components/ActionButton';
+import TextField from '@mui/material/TextField';
 import highlightedPalindromeHTML from './algorithms/Manacher';
 import highlightedLCSHTML from './algorithms/LCS';
 
@@ -20,7 +21,7 @@ function App() {
 
   return (
     <div className='column'>
-        <h1>String Algorithms UI</h1>
+        <h1>String Algorithms</h1>
         
         <div className='row'>
           <Card sx={{margin: '16px'}}>
@@ -42,7 +43,14 @@ function App() {
           <ActionButton algorithmText='Similitud' onClick={() => highlightedLCSHTML(fileContent1, fileContent2, setText1Content, setText2Content)}></ActionButton>
           <ActionButton algorithmText='Palíndromo' onClick={() => highlightedPalindromeHTML(fileContent1, setText1Content, fileContent2, setText2Content)}></ActionButton>
         </Stack>
-      
+
+        <h3>Autocompletar</h3>
+        <Card sx={{margin: '16px'}}>
+          <div className='column'>
+            <TextField id="outlined-basic" label="Escribe una palabra" variant="outlined" />
+
+          </div>
+        </Card>
     </div>
   )
 }
