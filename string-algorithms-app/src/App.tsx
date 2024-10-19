@@ -5,9 +5,9 @@ import './index.css'
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack'
 import ActionButton from './components/ActionButton';
-import TextField from '@mui/material/TextField';
 import highlightedPalindromeHTML from './algorithms/Manacher';
 import highlightedLCSHTML from './algorithms/LCS';
+import SearchBar from './components/SearchBar';
 
 function App() {
   // contenido de los dos archivos de texto
@@ -18,6 +18,9 @@ function App() {
   // búsqueda se modifica este estado con las etiquetas de <mark> para subrayar el texto dependiendo de la operación
   const [text1Content, setText1Content] = React.useState<string>('Esperando archivo...');
   const [text2Content, setText2Content] = React.useState<string>('Esperando archivo...');
+
+  // Convierte fileContent1 en un arreglo de palabras
+  const arrayOfWords = fileContent1.split(/\s+/).map((word) => word.trim()).filter((word) => word.length > 0);
 
   return (
     <div className='column'>
@@ -47,8 +50,7 @@ function App() {
         <h3>Autocompletar</h3>
         <Card sx={{margin: '16px'}}>
           <div className='column'>
-            <TextField id="outlined-basic" label="Escribe una palabra" variant="outlined" />
-
+            <SearchBar arrayOfWords={arrayOfWords}></SearchBar>
           </div>
         </Card>
     </div>
