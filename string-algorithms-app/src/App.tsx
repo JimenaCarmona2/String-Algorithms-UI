@@ -7,7 +7,9 @@ import Stack from '@mui/material/Stack'
 import ActionButton from './components/ActionButton';
 import highlightedPalindromeHTML from './algorithms/Manacher';
 import highlightedLCSHTML from './algorithms/LCS';
+import highlightedZHTML from './algorithms/Z';
 import SearchBar from './components/SearchBar';
+import { TextField } from '@mui/material';
 
 function App() {
   // contenido de los dos archivos de texto
@@ -18,6 +20,14 @@ function App() {
   // búsqueda se modifica este estado con las etiquetas de <mark> para subrayar el texto dependiendo de la operación
   const [text1Content, setText1Content] = React.useState<string>('Esperando archivo...');
   const [text2Content, setText2Content] = React.useState<string>('Esperando archivo...');
+
+  // Estado para guardar el valor del TextField para la funcionalidad de buscar
+  const [inputValue, setInputValue] = React.useState('');
+
+  // Función para manejar el cambio en el TextField 
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value); // Actualiza el estado con el nuevo valor
+  };
 
   // Convierte fileContent1 en un arreglo de palabras
   const arrayOfWords = fileContent1.split(/\s+/).map((word) => word.trim()).filter((word) => word.length > 0);
@@ -50,13 +60,25 @@ function App() {
           <ActionButton algorithmText='Palíndromo' activeButton={activeButton} onClick={() => {highlightedPalindromeHTML(fileContent1, setText1Content, fileContent2, setText2Content); setActiveButton('Palíndromo');}} fileContent1={fileContent1} fileContent2={fileContent2}></ActionButton>
         </Stack>
 
-        <h3>Autocompletar</h3>
-        <Card sx={{margin: '16px'}}>
+        <div className='row'>
           <div className='column'>
-            <SearchBar arrayOfWords={arrayOfWords}></SearchBar>
+            <h3>Autocompletar</h3>
+            <Card sx={{marginRight: '16px'}}>
+                <SearchBar arrayOfWords={arrayOfWords}></SearchBar>
+            </Card>
           </div>
-        </Card>
+          <div className='column'>
+            <h3>Buscar</h3>
+            <div className='row'></div>
+            <Card>
+              <TextField label="Escribe una palabra" variant="outlined" value={inputValue} onChange={handleInputChange} />
+            </Card>
+            <ActionButton algorithmText='Buscar' activeButton={activeButton} onClick={() => {highlightedZHTML(inputValue, fileContent1, setText1Content); setActiveButton('Buscar');}} fileContent1={fileContent1} fileContent2={fileContent2}></ActionButton>
+          </div>
+        </div>
+
     </div>
+
   )
 }
 
