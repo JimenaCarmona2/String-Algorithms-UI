@@ -21,12 +21,35 @@ function App() {
   const [text1Content, setText1Content] = React.useState<string>('Esperando archivo...');
   const [text2Content, setText2Content] = React.useState<string>('Esperando archivo...');
 
-  // Estado para guardar el valor del TextField para la funcionalidad de buscar
+  // Estado para guardar el valor del TextField para Buscar
   const [inputValue, setInputValue] = React.useState('');
+  // Estado que guarda las coincidencias para Buscar
+  const [matches, setMatches] = React.useState<number[]>([]);
+  // Estado que guarda el índice de coincidencia para Buscar
+  const [currentMatchIndex, setCurrentMatchIndex] = React.useState<number>(0);
 
   // Función para manejar el cambio en el TextField 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value); // Actualiza el estado con el nuevo valor
+  };
+
+  // Ir a la coincidencia anterior del input con T1
+  const goToPreviousMatch = () => {
+    setCurrentMatchIndex((prevIndex) => 
+      prevIndex > 0 ? prevIndex - 1 : matches.length - 1
+    );
+    if (matches.length > 0) {
+      highlightedZHTML(inputValue, fileContent1, setText1Content, setMatches, currentMatchIndex - 1); // Resalta la coincidencia anterior
+    }
+  };
+
+  // Ir a la coincidencia siguiente del input con T1
+  const goToNextMatch = () => {
+    setCurrentMatchIndex((prevIndex) => {
+      const newIndex = prevIndex < matches.length - 1 ? prevIndex + 1 : 0;
+      highlightedZHTML(inputValue, fileContent1, setText1Content, setMatches, newIndex); // Resalta la nueva coincidencia
+      return newIndex; // Actualiza el índice
+    });
   };
 
   // Convierte fileContent1 en un arreglo de palabras
@@ -73,7 +96,11 @@ function App() {
             <Card>
               <TextField label="Escribe una palabra" variant="outlined" value={inputValue} onChange={handleInputChange} />
             </Card>
-            <ActionButton algorithmText='Buscar' activeButton={activeButton} onClick={() => {highlightedZHTML(inputValue, fileContent1, setText1Content); setActiveButton('Buscar');}} fileContent1={fileContent1} fileContent2={fileContent2}></ActionButton>
+            <ActionButton algorithmText='Buscar' activeButton={activeButton} onClick={() => {highlightedZHTML(inputValue, fileContent1, setText1Content, setMatches, 0); setActiveButton('Buscar'); setCurrentMatchIndex(0);}} fileContent1={fileContent1} fileContent2={fileContent2}></ActionButton>
+            <div>
+              <button onClick={goToPreviousMatch} disabled={matches.length === 0}>Anterior</button>
+              <button onClick={goToNextMatch} disabled={matches.length === 0}>Siguiente</button>
+            </div>
           </div>
         </div>
 
