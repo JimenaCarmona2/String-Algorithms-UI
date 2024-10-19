@@ -1,5 +1,6 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import DOMPurify from 'dompurify';
 
 interface MultilineTextFieldProps {
   label: string;
@@ -7,6 +8,8 @@ interface MultilineTextFieldProps {
 }
 
 export default function MultilineTextField({ label, text }: MultilineTextFieldProps) {
+  const sanitizedText = DOMPurify.sanitize(text);
+
   return (
     <Box
       component='form'
@@ -37,9 +40,9 @@ export default function MultilineTextField({ label, text }: MultilineTextFieldPr
         </Typography>
         
         <div
-          dangerouslySetInnerHTML={{ __html: text }}
+          dangerouslySetInnerHTML={{ __html: sanitizedText }}
         />
-        </Box>
+      </Box>
     </Box>
   );
 }
