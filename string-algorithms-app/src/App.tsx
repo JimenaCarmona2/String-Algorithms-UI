@@ -20,7 +20,7 @@ function App() {
   const [text2Content, setText2Content] = React.useState<string>('Esperando archivo...');
 
   // Convierte fileContent1 en un arreglo de palabras
-  const arrayOfWords = fileContent1.split('\n').map((line) => line.trim());
+  const arrayOfWords = fileContent1.split(/\s+/).map((word) => word.trim()).filter((word) => word.length > 0);
 
   return (
     <div className='column'>
@@ -50,7 +50,7 @@ function App() {
         <h3>Autocompletar</h3>
         <Card sx={{margin: '16px'}}>
           <div className='column'>
-
+            <SearchBar arrayOfWords={arrayOfWords}></SearchBar>
           </div>
         </Card>
     </div>
