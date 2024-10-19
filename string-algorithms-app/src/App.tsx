@@ -73,7 +73,7 @@ function App() {
             <Card>
               <TextField label="Escribe una palabra" variant="outlined" value={inputValue} onChange={handleInputChange} />
             </Card>
-              <ActionButton algorithmText='Buscar' onClick={() => highlightedZHTML(inputValue, fileContent1, setText1Content)}></ActionButton>
+            <ActionButton algorithmText='Buscar' activeButton={activeButton} onClick={() => {highlightedZHTML(inputValue, fileContent1, setText1Content); setActiveButton('Buscar');}} fileContent1={fileContent1} fileContent2={fileContent2}></ActionButton>
           </div>
         </div>
 
