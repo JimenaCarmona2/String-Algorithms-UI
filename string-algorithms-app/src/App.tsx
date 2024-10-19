@@ -22,6 +22,9 @@ function App() {
   // Convierte fileContent1 en un arreglo de palabras
   const arrayOfWords = fileContent1.split(/\s+/).map((word) => word.trim()).filter((word) => word.length > 0);
 
+  // estado para saber cuál botón está seleccionado
+  const [activeButton, setActiveButton] = React.useState<string>('');
+
   return (
     <div className='column'>
         <h1>String Algorithms</h1>
@@ -43,8 +46,8 @@ function App() {
         </div>
 
         <Stack  direction='row' sx = {{margin: '16px'}}>
-          <ActionButton algorithmText='Similitud' onClick={() => highlightedLCSHTML(fileContent1, fileContent2, setText1Content, setText2Content)}></ActionButton>
-          <ActionButton algorithmText='Palíndromo' onClick={() => highlightedPalindromeHTML(fileContent1, setText1Content, fileContent2, setText2Content)}></ActionButton>
+          <ActionButton algorithmText='Similitud' activeButton={activeButton} onClick={() => {highlightedLCSHTML(fileContent1, fileContent2, setText1Content, setText2Content); setActiveButton('Similitud');}} fileContent1={fileContent1} fileContent2={fileContent2} ></ActionButton>
+          <ActionButton algorithmText='Palíndromo' activeButton={activeButton} onClick={() => {highlightedPalindromeHTML(fileContent1, setText1Content, fileContent2, setText2Content); setActiveButton('Palíndromo');}} fileContent1={fileContent1} fileContent2={fileContent2}></ActionButton>
         </Stack>
 
         <h3>Autocompletar</h3>
