@@ -64,16 +64,19 @@ export function Z(T: string, P: string) {
 }
 
 // regresa un html con etiquetas de <mark> que subrayan las palabras que coincidan
-export default function highlightedZHTML(P: string, T: string, setText1Content: React.Dispatch<React.SetStateAction<string>>) {
+export default function highlightedZHTML(P: string, T: string, setText1Content: React.Dispatch<React.SetStateAction<string>>, setMatches: React.Dispatch<React.SetStateAction<number[]>>, currentIndex: number) {
     let ZResult = Z(T, P);
     
-    if (ZResult.length === 0) {
+    // Se guardan todas las coincidencias
+    setMatches(ZResult); 
+
+    if (ZResult.length === 0 || currentIndex < 0 || currentIndex >= ZResult.length) {
         setText1Content(T);
         return;
     }
 
-    // Subrayar la primera coincidencia
-    const startIndex = ZResult[0];
+    // Resalta la coincidencia de P en T1 actual
+    const startIndex = ZResult[currentIndex];
     const endIndex = startIndex + P.length;
 
     let highlightedText = '';
@@ -81,7 +84,7 @@ export default function highlightedZHTML(P: string, T: string, setText1Content: 
 
     while (i < T.length) {
         if (i === startIndex) {
-            highlightedText += '<mark style="background-color: lightblue;">';
+            highlightedText += '<mark>';
             highlightedText += T.slice(startIndex, endIndex);
             highlightedText += '</mark>';
             i = endIndex; // Mueve el índice al final de la coincidencia
