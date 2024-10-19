@@ -1,15 +1,14 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
-import { Autocomplete } from '../components/Autocomplete'; // assuming it contains hooks
+import { Autocomplete } from '../components/Autocomplete';
 
 interface SearchBarProps {
   arrayOfWords: string[];
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ arrayOfWords }) => {
-  const [searchTerm, setSearchTerm] = React.useState(''); // User input
+  const [searchTerm, setSearchTerm] = React.useState('');
 
-  // Directly call Autocomplete if it contains hooks
   const matchingWords = Autocomplete(searchTerm, arrayOfWords);
 
   return (
@@ -19,7 +18,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ arrayOfWords }) => {
         label="Escribe una palabra"
         variant="outlined"
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)} // Update state on input
+        onChange={(e) => setSearchTerm(e.target.value)}
         fullWidth
       />
     
