@@ -19,8 +19,12 @@ function App() {
   const [text1Content, setText1Content] = React.useState<string>('Esperando archivo...');
   const [text2Content, setText2Content] = React.useState<string>('Esperando archivo...');
 
-  // Convierte fileContent1 en un arreglo de palabras
-  const arrayOfWords = fileContent1.split(/\s+/).map((word) => word.trim()).filter((word) => word.length > 0);
+  const [arrayOfWords, setArrayOfWords] = React.useState<string[]>([]);
+
+  // Convierte fileContent1 en un arreglo de palabras y se actualiza cuando se introduce un nuevo archivo
+  React.useEffect(() => {
+    setArrayOfWords(fileContent1.split(/\s+/).map((word) => word.trim()).filter((word) => word.length > 0));
+  }, [fileContent1]);
 
   // estado para saber cuál botón está seleccionado
   const [activeButton, setActiveButton] = React.useState<string>('');
