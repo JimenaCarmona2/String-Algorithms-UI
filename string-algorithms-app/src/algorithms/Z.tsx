@@ -44,7 +44,7 @@ function computeZArray(S: string) {
 
 // regresa los índices en donde empieza la subcadena P dentro de T, para poder encontrar el rango
 // en el que está la palabra se calcula el índice más el tamaño de P
-export default function Z(T: string, P: string) {
+export function Z(T: string, P: string) {
     let indexes = Array(0);
 
     let S = P + '$' + T;
@@ -63,3 +63,33 @@ export default function Z(T: string, P: string) {
     return indexes;
 }
 
+// regresa un html con etiquetas de <mark> que subrayan las palabras que coincidan
+export default function highlightedZHTML(P: string, T: string, setText1Content: React.Dispatch<React.SetStateAction<string>>) {
+    let ZResult = Z(T, P);
+    
+    if (ZResult.length === 0) {
+        setText1Content(T);
+        return;
+    }
+
+    // Subrayar la primera coincidencia
+    const startIndex = ZResult[0];
+    const endIndex = startIndex + P.length;
+
+    let highlightedText = '';
+    let i = 0;
+
+    while (i < T.length) {
+        if (i === startIndex) {
+            highlightedText += '<mark style="background-color: lightblue;">';
+            highlightedText += T.slice(startIndex, endIndex);
+            highlightedText += '</mark>';
+            i = endIndex; // Mueve el índice al final de la coincidencia
+        } else {
+            highlightedText += T[i];
+            i++;
+        }
+    }
+
+    setText1Content(highlightedText);
+}

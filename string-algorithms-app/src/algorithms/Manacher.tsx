@@ -1,4 +1,4 @@
-import Z from './Z'
+import { Z } from './Z'
 
 function computeManacherString(T: string) {
     let manacherString = '';
