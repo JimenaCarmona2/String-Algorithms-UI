@@ -19,6 +19,9 @@ function App() {
   const [text1Content, setText1Content] = React.useState<string>('Esperando archivo...');
   const [text2Content, setText2Content] = React.useState<string>('Esperando archivo...');
 
+  // state to know which option is activated of the 'Similitud' and 'Palíndromo' buttons
+  const [activeButton, setActiveButton] = React.useState<string>('');
+
   return (
     <div className='column'>
         <h1>String Algorithms</h1>
@@ -40,8 +43,8 @@ function App() {
         </div>
 
         <Stack  direction='row' sx = {{margin: '16px'}}>
-          <ActionButton algorithmText='Similitud' onClick={() => highlightedLCSHTML(fileContent1, fileContent2, setText1Content, setText2Content)}></ActionButton>
-          <ActionButton algorithmText='Palíndromo' onClick={() => highlightedPalindromeHTML(fileContent1, setText1Content, fileContent2, setText2Content)}></ActionButton>
+          <ActionButton algorithmText='Similitud' activeButton={activeButton} onClick={() => {highlightedLCSHTML(fileContent1, fileContent2, setText1Content, setText2Content); setActiveButton('Similitud');}} fileContent1={fileContent1} fileContent2={fileContent2} ></ActionButton>
+          <ActionButton algorithmText='Palíndromo' activeButton={activeButton} onClick={() => {highlightedPalindromeHTML(fileContent1, setText1Content, fileContent2, setText2Content); setActiveButton('Palíndromo');}} fileContent1={fileContent1} fileContent2={fileContent2}></ActionButton>
         </Stack>
 
         <h3>Autocompletar</h3>
