@@ -7,7 +7,8 @@ interface SearchBarProps {
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ arrayOfWords }) => {
-  const [searchTerm, setSearchTerm] = React.useState(''); // Input del usuario
+  const [searchTerm, setSearchTerm] = React.useState('');
+
   const matchingWords = Autocomplete(searchTerm, arrayOfWords);
 
   return (
@@ -17,14 +18,14 @@ const SearchBar: React.FC<SearchBarProps> = ({ arrayOfWords }) => {
         label="Escribe una palabra"
         variant="outlined"
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)} // Actualizar el estado al escribir
+        onChange={(e) => setSearchTerm(e.target.value)}
         fullWidth
       />
     
       {searchTerm && matchingWords.length > 0 && (
         <ul>
-          {matchingWords.map((matchingWords, index) => (
-            <li key={index}>{matchingWords}</li>
+          {matchingWords.map((matchingWord, index) => (
+            <li key={index}>{matchingWord}</li>
           ))}
         </ul>
       )}

@@ -24,16 +24,21 @@ function App() {
   // Estado para guardar el valor del TextField para la funcionalidad de buscar
   const [inputValue, setInputValue] = React.useState('');
 
+  // arreglo de los tokens de palabras para insertarlos al trie
+  const [arrayOfWords, setArrayOfWords] = React.useState<string[]>([]);
+
+  // estado para saber cuál botón está seleccionado
+  const [activeButton, setActiveButton] = React.useState<string>('');
+
+  // Convierte fileContent1 en un arreglo de palabras y se actualiza cuando se introduce un nuevo archivo
+  React.useEffect(() => {
+    setArrayOfWords(fileContent1.split(/\s+/).map((word) => word.trim()).filter((word) => word.length > 0));
+  }, [fileContent1]);
+  
   // Función para manejar el cambio en el TextField 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value); // Actualiza el estado con el nuevo valor
   };
-
-  // Convierte fileContent1 en un arreglo de palabras
-  const arrayOfWords = fileContent1.split(/\s+/).map((word) => word.trim()).filter((word) => word.length > 0);
-
-  // estado para saber cuál botón está seleccionado
-  const [activeButton, setActiveButton] = React.useState<string>('');
 
   return (
     <div className='column'>
